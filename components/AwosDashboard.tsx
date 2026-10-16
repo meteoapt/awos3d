@@ -189,11 +189,6 @@ export default function AwosDashboard() {
         Cesium.Ion.defaultAccessToken =
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IkR3S3c1cDJxdVZjQ0VuUnYiLCJqdGkiOiJhZDM3MWQ3MC02NTUzLTRiNGMtYjQzNi00OTM5MWE1YmZhMjYiLCJpZCI6NTIyNzE0LCJpc3MiOiJodHRwczovL2FwaS5jZXNpdW0uY29tIiwiYXVkIjoidW5kZWZpbmVkX2RlZmF1bHQiLCJpYXQiOjE3OTE4OTA2NjN9.uQSrlsN9rX4NvZ75Ci8V5VKwxvbctCPRqwdoM60zF1M";
 
-        //const terrainProvider = await Cesium.createWorldTerrainAsync({
-        //requestWaterMask: true,
-        //requestVertexNormals: true,
-        //});
-
         if (cancelled || !mapRef.current) return;
 
         const viewer = new Cesium.Viewer(mapRef.current, {
@@ -213,15 +208,12 @@ export default function AwosDashboard() {
               url: "https://tile.openstreetmap.org/",
             }),
           ),
-
-          //terrainProvider,
         });
 
         createdViewer = viewer;
         viewerRef.current = viewer;
 
         viewer.scene.globe.depthTestAgainstTerrain = false;
-        //viewer.scene.verticalExaggeration = 1.2;
 
         // Koleksi awan 3D.
         cloudsRef.current = viewer.scene.primitives.add(
@@ -636,13 +628,6 @@ export default function AwosDashboard() {
       ) {
         if (!ctx) return;
 
-        const length = 11;
-        const headLength = 4;
-        const halfWidth = 2.8;
-
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
         const length = 11;
         const headLength = 4;
         const halfWidth = 2.8;
