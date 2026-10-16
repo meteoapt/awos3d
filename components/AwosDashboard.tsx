@@ -505,6 +505,8 @@ export default function AwosDashboard() {
       }
 
       function resizeCanvas() {
+        if (!canvas) return;
+
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
 
