@@ -634,6 +634,15 @@ export default function AwosDashboard() {
         angle: number,
         color: [number, number, number],
       ) {
+        if (!ctx) return;
+
+        const length = 11;
+        const headLength = 4;
+        const halfWidth = 2.8;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
         const length = 11;
         const headLength = 4;
         const halfWidth = 2.8;
