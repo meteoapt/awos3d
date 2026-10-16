@@ -1,0 +1,460 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.hud-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #071426;
+  color: #f5f9ff;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.cesium-fullscreen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cesium-fullscreen .cesium-widget,
+.cesium-fullscreen .cesium-widget canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.wind-particle-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: transparent;
+}
+
+.hud-panel {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid rgba(148, 190, 230, 0.22);
+  border-radius: 16px;
+  color: #f5f9ff;
+  background: rgba(5, 18, 36, 0.76);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+.top-left {
+  top: 22px;
+  left: 22px;
+  padding: 18px 22px;
+  min-width: 255px;
+}
+
+.top-left h1 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.top-left h1 span {
+  color: #48a9ff;
+}
+
+.top-left p {
+  margin: 5px 0 14px;
+  color: #9eb6d2;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff626c;
+}
+
+.status-indicator.live .dot {
+  background: #4ce0b3;
+  box-shadow: 0 0 12px rgba(76, 224, 179, 0.9);
+}
+
+.status-indicator.offline {
+  color: #ff9298;
+}
+
+.bottom-center {
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+}
+
+.point-selector {
+  display: flex;
+  gap: 9px;
+}
+
+.point-selector button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 126px;
+  padding: 12px 15px;
+  border: 1px solid;
+  border-radius: 10px;
+  color: #f5f9ff;
+  background: rgba(9, 28, 50, 0.75);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.point-selector button:hover {
+  background: rgba(42, 83, 122, 0.65);
+  transform: translateY(-2px);
+}
+
+.point-selector button.active {
+  background: rgba(51, 113, 166, 0.36);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.point-selector strong {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+}
+
+.point-selector span {
+  color: #b6cde6;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.compass-widget {
+  right: 22px;
+  bottom: 22px;
+  padding: 12px;
+}
+
+.compass-header {
+  margin-bottom: 10px;
+  color: #9eb6d2;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.compass-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 38px);
+  gap: 5px;
+}
+
+.compass-grid button {
+  height: 36px;
+  border: 1px solid rgba(148, 190, 230, 0.25);
+  border-radius: 8px;
+  color: #e6f2ff;
+  background: rgba(29, 57, 86, 0.7);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.compass-grid button:hover {
+  background: rgba(61, 130, 193, 0.6);
+}
+
+.compass-grid .north-btn {
+  color: #4ce0b3;
+  font-weight: 900;
+}
+
+.center-right {
+  top: 50%;
+  right: 22px;
+  width: min(320px, calc(100% - 32px));
+  max-height: calc(100% - 44px);
+  padding: 17px;
+  overflow-y: auto;
+  transform: translateY(-50%);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
+
+.panel-header button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(148, 190, 230, 0.25);
+  border-radius: 9px;
+  color: #cce5ff;
+  background: rgba(35, 74, 112, 0.55);
+  cursor: pointer;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.panel-header button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.spin {
+  animation: awos-spin 0.8s linear infinite;
+}
+
+@keyframes awos-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.data-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(148, 190, 230, 0.12);
+  border-radius: 10px;
+  background: rgba(24, 47, 73, 0.55);
+}
+
+.data-box > span,
+.common-data span {
+  color: #92aac6;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+.data-box strong {
+  overflow-wrap: anywhere;
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-box small {
+  margin-left: 4px;
+  color: #91abc8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.common-data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(148, 190, 230, 0.17);
+}
+
+.common-data > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.common-data strong {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wind-legend {
+  margin-top: 17px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(148, 190, 230, 0.17);
+}
+
+.wind-legend-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9px;
+  color: #c3d8ef;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.wind-legend-title span {
+  color: #91abc8;
+}
+
+.wind-gradient {
+  height: 7px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #4b96ff 0%,
+    #28cdff 20%,
+    #37ebb4 40%,
+    #d2f555 60%,
+    #ffb937 80%,
+    #ff555a 100%
+  );
+}
+
+.wind-legend-values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: #9eb6d2;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.api-error {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid rgba(255, 100, 110, 0.3);
+  border-radius: 8px;
+  color: #ffb5ba;
+  background: rgba(150, 35, 48, 0.18);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .center-right {
+    top: 15px;
+    right: 15px;
+    width: 275px;
+    max-height: calc(100% - 30px);
+    transform: none;
+  }
+
+  .top-left {
+    top: 15px;
+    left: 15px;
+    min-width: 210px;
+    padding: 14px;
+  }
+
+  .bottom-center {
+    bottom: 15px;
+    left: 15px;
+    transform: none;
+  }
+
+  .point-selector {
+    flex-direction: column;
+  }
+
+  .point-selector button {
+    min-width: 120px;
+    padding: 9px 12px;
+  }
+
+  .compass-widget {
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hud-container {
+    min-height: 720px;
+  }
+
+  .top-left {
+    right: 15px;
+    min-width: 0;
+  }
+
+  .top-left h1 {
+    font-size: 22px;
+  }
+
+  .center-right {
+    top: 140px;
+    right: 12px;
+    width: min(255px, calc(100% - 24px));
+    padding: 12px;
+  }
+
+  .data-box {
+    padding: 9px;
+  }
+
+  .data-box strong {
+    font-size: 14px;
+  }
+
+  .bottom-center {
+    bottom: 12px;
+  }
+
+  .point-selector button {
+    min-width: 112px;
+  }
+
+  .compass-widget {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px;
+  }
+
+  .compass-grid {
+    grid-template-columns: repeat(3, 32px);
+    gap: 4px;
+  }
+
+  .compass-grid button {
+    height: 32px;
+  }
+}
