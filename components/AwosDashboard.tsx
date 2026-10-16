@@ -520,6 +520,8 @@ export default function AwosDashboard() {
           canvas.height = targetHeight;
         }
 
+        if (!ctx) return;
+
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
